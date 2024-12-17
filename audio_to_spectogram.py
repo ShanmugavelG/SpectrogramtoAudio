@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 22 12:59:10 2023
-
-@author: Henry
-"""
 
 import argparse
 from pathlib import Path
@@ -16,35 +9,12 @@ from concurrent.futures import ProcessPoolExecutor
 
 
 def list_files(source):
-    """
-    List all files in the given source directory and its subdirectories.
-
-    Args:
-        source (str): The source directory path.
-
-    Returns:
-        list: A list of Path objects representing the files.
-    """
     path = Path(source)
     files = [file for file in path.rglob('*') if file.is_file()]
     return files
 
 
 def audio_to_spectrogram(audio_path, save_path, duration, n_fft=2048, hop_length=512, win_length=None):
-    """
-    Convert an audio file to a spectrogram and save it as an image with enhanced resolution.
-
-    Args:
-        audio_path (str): The path to the audio file.
-        save_path (str): The path to save the spectrogram image.
-        duration (int): Duration of the audio file to process in seconds.
-        n_fft (int): FFT window size.
-        hop_length (int): Number of samples between successive frames.
-        win_length (int): Each frame of audio is windowed by window(). The default value is n_fft.
-
-    Returns:
-        None
-    """
     try:
         # Load audio file
         y, sr = librosa.load(audio_path, duration=duration)
